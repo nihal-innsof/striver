@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <iostream>
+#include <map>
 #include <vector>
 
 using namespace std;
@@ -21,7 +22,7 @@ int main() {
 }
 
 // Better approach (Hashing)
-/* vector<int> twoSum(vector<int> &nums, int target) {
+vector<int> twoSum(vector<int> &nums, int target) {
   int n = nums.size();
   map<int, int> x;
   vector<int> result;
@@ -35,10 +36,25 @@ int main() {
     x[nums[i]] = i;
   }
   return {};
-} */
+}
 
 // Optimal solution (2 pointers)
-vector<int> twoSum(vector<int> &nums, int target) {
+bool twoSum2(vector<int> &nums, int target) {
+  int n = nums.size();
   sort(nums.begin(), nums.end());
-  return nums;
+  int left = 0, right = n - 1;
+  long long sum = nums[left];
+  while (left <= right) {
+    sum = nums[left] + nums[right];
+    if (sum > target) {
+      right--;
+    }
+    if (sum == target) {
+      return true;
+    }
+    if (sum < target) {
+      left++;
+    }
+  }
+  return false;
 }
