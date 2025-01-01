@@ -100,16 +100,18 @@ func union(a1 []int, a2 []int) []int {
 
 // Better approach hashing
 func missingNumber(nums []int) int {
-	t := make([]int, len(nums)+1)
+	n := len(nums)
+	t := make([]int, n+1)
 	for _, i := range nums {
 		t[i] += 1
 	}
+	var result int
 	for i := range t {
 		if t[i] == 0 {
-			return i
+			result = i
 		}
 	}
-	return 0
+	return result
 }
 
 func main() {
